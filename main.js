@@ -47,10 +47,11 @@ document.addEventListener("visibilitychange", () => {
     }
 });
 
-shareQuote.addEventListener('click', (e) => {
+shareQuote.addEventListener('click', () => {
     shareData({
         title: "A nice quote",
-        url: location.href
+        url: location.href,
+        text: quotePlaceHolder.textContent
     }).then(res => {
         console.log(res)
     }).catch(error => {
