@@ -57,7 +57,9 @@ shareQuote.addEventListener('click', () => {
     }).catch(error => {
         console.error(error)
     })
-})
+});
+
+const channel = new BroadcastChannel("quote_channel");
 
 const getQuote = endpoint => {
     return async function* (quotes = 5) {
@@ -87,6 +89,7 @@ const addQuote = () => {
     }
     const {content, author, dateAdded} = clone.shift();
     quotePlaceHolder.innerHTML = `<blockquote>${content}</blockquote><cite>${author}</cite><time datetime="${dateAdded}">${dateAdded}</time>`;
+    channel.postMessage(`A new quote with has been posted to the channel. ${content} Author: ${author}`)
     if (!clone.length) {
         clone = Array.from(quotes);
     }
